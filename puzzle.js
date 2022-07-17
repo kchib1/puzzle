@@ -14,7 +14,7 @@ function createBoard() {
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 4; j++) {
             let tile = document.createElement('div');
-            tile.id = 'tile_${i}_${j}';
+            tile.id = "tile_" + i + "_" + j;
             tile.classList.add('tile');
             count++;
             tile.innerHTML = count.toString();
@@ -49,6 +49,10 @@ function getNeighbors(targetTile) {
     let y = parseInt(xyCord[1]);
     let x = parseInt(xyCord[2]);
 
+    console.log(xyCord);
+    console.log(y);
+    console.log(x);
+
     let neighbors = [];
 
     if (x < 3) {
@@ -64,6 +68,7 @@ function getNeighbors(targetTile) {
         neighbors.push(getTile(x, y - 1));
     }
 
+    console.log(neighbors);
     return neighbors;
 }
 
@@ -71,7 +76,8 @@ function getNeighbors(targetTile) {
 function getEmptyNeighbor(neighbors) {
     for (var i = 0; i < neighbors.length; i++) {
         if (neighbors[i].className === "empty") {
-            return neighbor[i];
+
+            return neighbors[i];
         }
     }
     return -1;
@@ -79,9 +85,11 @@ function getEmptyNeighbor(neighbors) {
 
 //moves target tile to empty neighbor if one exists
 function makeMove(targetTile) {
+    console.log(targetTile);
     let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
-
+    console.log(emptyTile);
     if (emptyTile === -1) {
+        console.log("if trigger")
         return;
     }
 
