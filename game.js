@@ -317,3 +317,8 @@ function swap(position) {
 
   spaceX = temp;
 }
+
+function changeBackgroundImage (background) {
+  let element = document.getElementById('test');
+  element.style.backgroundImage = "url("+background+")";
+}
