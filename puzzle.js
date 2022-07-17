@@ -30,7 +30,7 @@ function createBoard() {
 
 //randomly make a legal move 1000 times
 function shuffle() {
-
+    
 }
 
 //get tile by coordinate pair
@@ -40,19 +40,16 @@ function getTile(x, y) {
 
 //get empty tile
 function getEmptyTile() {
-    return document.querySelector('.empty');
+    return document.querySelector('.emptyTile');
 }
 
 //get tiles which neighbor the passed tile
 function getNeighbors(targetTile) {
     let xyCord = targetTile.id.split("_");
-    let y = parseInt(xyCord[1]);
-    let x = parseInt(xyCord[2]);
+    let x = parseInt(xyCord[1]);
+    let y = parseInt(xyCord[2]);
 
-    console.log(xyCord);
-    console.log(y);
-    console.log(x);
-
+    console.log(x + "," +y);
     let neighbors = [];
 
     if (x < 3) {
@@ -68,18 +65,17 @@ function getNeighbors(targetTile) {
         neighbors.push(getTile(x, y - 1));
     }
 
-    console.log(neighbors);
     return neighbors;
 }
 
 //returns -1 if there is no empty neighbor
 function getEmptyNeighbor(neighbors) {
     for (var i = 0; i < neighbors.length; i++) {
-        if (neighbors[i].className === "empty") {
-
+        if (neighbors[i].className === "emptyTile") {
             return neighbors[i];
         }
     }
+
     return -1;
 }
 
@@ -87,19 +83,18 @@ function getEmptyNeighbor(neighbors) {
 function makeMove(targetTile) {
     console.log(targetTile);
     let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
-    console.log(emptyTile);
+
     if (emptyTile === -1) {
-        console.log("if trigger")
         return;
     }
 
     //swap target tile and empty tile
-    let tempTile = { style: targetTile.style.cssText, id: targetTile.id };
+    let tempTile = { className: targetTile.className, id: targetTile.id, innerHTML: targetTile.innerHTML};
 
-    targetTile.style.cssText = emptyTile.style.cssText;
-    targetTile.id = emptyTile.id;
-    emptyTile.style.cssText = tempTile.style.cssText;
-    emptyTile.id = tempTile.id;
+    targetTile.className = emptyTile.className;
+    targetTile.innerHTML = emptyTile.innerHTML;
+    emptyTile.className = tempTile.className;
+    emptyTile.innerHTML = tempTile.innerHTML;
 
 }
 
