@@ -39,12 +39,12 @@ function shuffle() {
         move(neighbors[rand]);
     }
 
-    // Init/start timer and music
-        initializeTimer();
-    setInterval(showInterval, 1000);
-    setTimeout(play, 500);
-    setInterval(play, 7000);  // Interval
-    showInterval();	
+    // // Init/start timer and music
+    // initializeTimer();
+    // setInterval(showInterval, 1000);
+    // setTimeout(play, 500);
+    // setInterval(play, 7000);  // Interval
+    // showInterval();	
 	
 }
 
