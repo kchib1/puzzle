@@ -33,6 +33,11 @@ function getTile(x, y) {
     return document.getElementById(`tile_${x}_${y}`);
 }
 
+//get empty tile
+function getEmptyTile() {
+    return document.querySelector('.empty');
+}
+
 //get tiles which neighbor the passed tile
 function getNeighbors(targetTile) {
     let xyCord = targetTile.id.split("_");
@@ -53,7 +58,35 @@ function getNeighbors(targetTile) {
     if (y > 0) {
         neighbors.push(getTile(x, y - 1));
     }
+
     return neighbors;
+}
+
+//returns -1 if there is no empty neighbor
+function getEmptyNeighbor(neighbors) {
+    for (var i = 0; i < neighbors.length; i++) {
+        if (neighbors[i].className === "empty") {
+            return neighbor[i];
+        }
+    }
+    return -1;
+}
+
+//moves target tile to empty neighbor if one exists
+function makeMove(targetTile) {
+    let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
+
+    if (emptyTile === -1) {
+        return;
+    }
+
+    let tempTile = { style: targetTile.style.cssText, id: targetTile.id };
+
+    targetTile.style.cssText = emptyTile.style.cssText;
+    targetTile.id = emptyTile.id;
+    emptyTile.style.cssText = tempTile.style.cssText;
+    emptyTile.id = tempTile.id;
+
 }
 
 
