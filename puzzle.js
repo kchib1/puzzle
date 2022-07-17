@@ -28,9 +28,32 @@ function shuffle() {
 
 }
 
+//get tile by coordinate pair
+function getTile(x, y) {
+    return document.getElementById(`tile_${x}_${y}`);
+}
+
 //get tiles which neighbor the passed tile
 function getNeighbors(targetTile) {
-    
+    let xyCord = targetTile.id.split("_");
+    let y = parseInt(xyCord[1]);
+    let x = parseInt(xyCord[2]);
+
+    let neighbors = [];
+
+    if (x < 3) {
+        neighbors.push(getTile(x + 1, y));
+    }
+    if (x > 0) {
+        neighbors.push(getTile(x - 1, y));
+    }
+    if (y < 3) {
+        neighbors.push(getTile(x, y + 1));
+    }
+    if (y > 0) {
+        neighbors.push(getTile(x, y - 1));
+    }
+    return neighbors;
 }
 
 
