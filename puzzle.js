@@ -3,6 +3,11 @@ let puzzle = document.getElementById('puzzle');
 createBoard();
 // shuffle();
 
+puzzle.addEventListener("click", function(e) {
+    makeMove(e.target);
+  });
+
+
 //create and populate 4x4 board 
 function createBoard() {
     let count = 0;
@@ -80,6 +85,7 @@ function makeMove(targetTile) {
         return;
     }
 
+    //swap target tile and empty tile
     let tempTile = { style: targetTile.style.cssText, id: targetTile.id };
 
     targetTile.style.cssText = emptyTile.style.cssText;
