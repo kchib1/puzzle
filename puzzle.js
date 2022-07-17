@@ -1,10 +1,10 @@
 let puzzle = document.getElementById('puzzle');
 
 createBoard();
-shuffle();
+//shuffle();
 
 puzzle.addEventListener("click", function(e) {
-    makeMove(e.target);
+    move(e.target);
   });
 
 
@@ -55,7 +55,6 @@ function getNeighbors(targetTile) {
     let x = parseInt(xyCord[1]);
     let y = parseInt(xyCord[2]);
 
-    console.log(x + "," +y);
     let neighbors = [];
 
     if (x < 3) {
@@ -87,7 +86,6 @@ function getEmptyNeighbor(neighbors) {
 
 //moves target tile to empty neighbor if one exists
 function move(targetTile) {
-    console.log(targetTile);
     let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
 
     if (emptyTile === -1) {
