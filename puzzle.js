@@ -1,7 +1,9 @@
 let puzzle = document.getElementById('puzzle');
 
 createBoard();
+
 //shuffle();
+
 
 puzzle.addEventListener("click", function(e) {
     move(e.target);
@@ -14,7 +16,7 @@ function createBoard() {
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 4; j++) {
             let tile = document.createElement('div');
-            tile.id = "tile_" + i + "_" + j;
+            tile.id = 'tile_${i}_${j}';
             tile.classList.add('tile');
             count++;
             tile.innerHTML = count.toString();
@@ -30,13 +32,7 @@ function createBoard() {
 
 //randomly make a legal move 1000 times
 function shuffle() {
-    let neighbors;
-    let rand;
-    for(var i = 0; i < 1000; i++) {
-        neighbors = getNeighbors(getEmptyTile());
-        rand = parseInt(Math.random() * (neighbors.length));
-        move(neighbors[rand]);
-    }
+
 }
 
 //get tile by coordinate pair
@@ -46,14 +42,14 @@ function getTile(x, y) {
 
 //get empty tile
 function getEmptyTile() {
-    return document.querySelector('.emptyTile');
+    return document.querySelector('.empty');
 }
 
 //get tiles which neighbor the passed tile
 function getNeighbors(targetTile) {
     let xyCord = targetTile.id.split("_");
-    let x = parseInt(xyCord[1]);
-    let y = parseInt(xyCord[2]);
+    let y = parseInt(xyCord[1]);
+    let x = parseInt(xyCord[2]);
 
     let neighbors = [];
 
@@ -76,16 +72,16 @@ function getNeighbors(targetTile) {
 //returns -1 if there is no empty neighbor
 function getEmptyNeighbor(neighbors) {
     for (var i = 0; i < neighbors.length; i++) {
-        if (neighbors[i].className === "emptyTile") {
-            return neighbors[i];
+        if (neighbors[i].className === "empty") {
+            return neighbor[i];
         }
     }
-
     return -1;
 }
 
 //moves target tile to empty neighbor if one exists
 function move(targetTile) {
+
     let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
 
     if (emptyTile === -1) {
@@ -93,13 +89,18 @@ function move(targetTile) {
     }
 
     //swap target tile and empty tile
-    let tempTile = { className: targetTile.className, id: targetTile.id, innerHTML: targetTile.innerHTML};
+    let tempTile = { style: targetTile.style.cssText, id: targetTile.id };
 
-    targetTile.className = emptyTile.className;
-    targetTile.innerHTML = emptyTile.innerHTML;
-    emptyTile.className = tempTile.className;
-    emptyTile.innerHTML = tempTile.innerHTML;
+    targetTile.style.cssText = emptyTile.style.cssText;
+    targetTile.id = emptyTile.id;
+    emptyTile.style.cssText = tempTile.style.cssText;
+    emptyTile.id = tempTile.id;
 
 }
+
+function changeBackgroundImage (background) {
+    element = document.getElementById('test');
+    element.style.backgroundImage = "url("+background+")";
+ }
 
 
