@@ -1,0 +1,27 @@
+#puzzle {
+    position: relative;
+    display: block;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.tile {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    font-size: 32pt;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.emptyTile {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    margin: 0 auto;
+}
