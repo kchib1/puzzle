@@ -1,7 +1,7 @@
 let puzzle = document.getElementById('puzzle');
 
 createBoard();
-// shuffle();
+shuffle();
 
 puzzle.addEventListener("click", function(e) {
     makeMove(e.target);
@@ -30,7 +30,13 @@ function createBoard() {
 
 //randomly make a legal move 1000 times
 function shuffle() {
-    
+    let neighbors;
+    let rand;
+    for(var i = 0; i < 1000; i++) {
+        neighbors = getNeighbors(getEmptyTile());
+        rand = parseInt(Math.random() * (neighbors.length));
+        move(neighbors[rand]);
+    }
 }
 
 //get tile by coordinate pair
@@ -80,7 +86,7 @@ function getEmptyNeighbor(neighbors) {
 }
 
 //moves target tile to empty neighbor if one exists
-function makeMove(targetTile) {
+function move(targetTile) {
     console.log(targetTile);
     let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
 
