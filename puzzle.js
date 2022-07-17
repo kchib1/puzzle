@@ -1,7 +1,8 @@
 let puzzle = document.getElementById('puzzle');
+let isSolved = 0;
 
 createBoard();
-//shuffle();
+shuffle();
 
 puzzle.addEventListener("click", function(e) {
     move(e.target);
@@ -38,12 +39,13 @@ function shuffle() {
         move(neighbors[rand]);
     }
 
-    // Init/start timer and music
-        initializeTimer();
-    setInterval(showInterval, 1000);
-    setTimeout(play, 500);
-    setInterval(play, 7000);  // Interval
-    showInterval();	
+// This has to be uncommented to work
+    // // Init/start timer and music
+    // initializeTimer();
+    // setInterval(showInterval, 1000);
+    // setTimeout(play, 500);
+    // setInterval(play, 7000);  // Interval
+    // showInterval();	
 	
 }
 
@@ -92,6 +94,16 @@ function getEmptyNeighbor(neighbors) {
     return -1;
 }
 
+//check if a tile is moveable and add class 'moveableTile' if it is
+function checkMoveable(targetTile) {
+    if (getEmptyNeighbor(getNeighbors(targetTile)) === -1) {
+        targetTile.classList.add('moveableTile');
+    }
+    else {
+        return -1;
+    }
+}
+
 //moves target tile to empty neighbor if one exists
 function move(targetTile) {
     let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
@@ -108,6 +120,28 @@ function move(targetTile) {
     emptyTile.className = tempTile.className;
     emptyTile.innerHTML = tempTile.innerHTML;
 
+    checkSolved();
+}
+
+function checkSolved() {
+    let count = 0;
+    let currentTile;
+    
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 4; j++) {
+            count++;
+            currentTile = getTile(i, j);
+            console.log(count + ", " + currentTile.innerHTML);
+            if (currentTile.className != "emptyTile") {
+                if (currentTile.innerHTML != count) {
+                    return;
+                }
+            }
+        }
+    }
+    isSolved = 1;
+    alert("You Won!");
+    return 1;
 }
 
 
