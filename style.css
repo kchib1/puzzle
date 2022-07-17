@@ -1,7 +1,9 @@
 #puzzle {
+    height: 500px;
+    width: 500px;
     position: relative;
     display: flex;
-    height: 1000px;
+    flex-wrap: wrap;
     margin: auto;
 }
 
@@ -13,12 +15,11 @@
     border: 2px solid black;
     font-size: 32pt;
     text-align: center;
-    margin: 4px auto;
+    margin: auto;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    padding: 0px;
     font-size: 32px;
 }
 
@@ -30,7 +31,7 @@
     border: 2px solid black;
     font-size: 32pt;
     text-align: center;
-    margin: 4px auto;
+    margin: auto;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
