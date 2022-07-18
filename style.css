@@ -1,3 +1,10 @@
+body {
+    background-color: rgb(241, 213, 119);
+    margin-left: auto;
+	margin-right: auto;
+    text-align: center;
+}
+
 #puzzle {
     height: 400px;
     width: 450px;
@@ -5,6 +12,36 @@
     display: flex;
     flex-wrap: wrap;
     margin: auto;
+    left: 15px;
+}
+
+#timer {
+	background-color: white;
+	padding: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	width: 70px;
+	border: 1px solid black;
+	text-align: center;
+    margin-left: auto;
+	margin-right: auto;
+}
+
+.timerLabel {
+	position: relative;
+	padding: 3px;
+	background-color: white ;
+	border: 1px solid black; 
+	width: 145px;
+	align-content: center;
+	text-align: center;
+    margin-left: auto;
+	margin-right: auto;
+}
+
+button {
+    height: 25px;
+    width: 102px;
 }
 
 .tile {
@@ -14,6 +51,7 @@
     height: 100px;
     border: 2px solid black;
     font-size: 32pt;
+    color: #FFFFFF;
     text-align: center;
     justify-content: center;
     align-items: center;

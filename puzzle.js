@@ -30,6 +30,14 @@ function createBoard() {
         for (var j = 0; j < 4; j++) {
             let tile = document.createElement('div');
             tile.id = "tile_" + i + "_" + j;
+
+            tile.style.backgroundPosition = '-' + j*100 + 'px' + " " +'-' + i*100 + "px" ; //this math is off 
+            tile.style.backgroundImage = "url(jwst.jpg)";
+            if(j==3 && i==3){
+                tile.style.backgroundImage="url(white.jpg)";
+                console.log("test")
+            }
+
             tile.classList.add('tile');
             count++;
             tile.innerHTML = count.toString();
@@ -123,12 +131,16 @@ function move(targetTile) {
         }
 
         //swap target tile and empty tile
-        let tempTile = { className: targetTile.className, id: targetTile.id, innerHTML: targetTile.innerHTML};
+        let tempTile = { className: targetTile.className, id: targetTile.id, innerHTML: targetTile.innerHTML, backgroundImage: targetTile.style.backgroundImage, backgroundPosition: targetTile.style.backgroundPosition};
 
         targetTile.className = emptyTile.className;
         targetTile.innerHTML = emptyTile.innerHTML;
+        targetTile.style.backgroundPosition = emptyTile.style.backgroundPosition;
+        targetTile.style.backgroundImage = emptyTile.style.backgroundImage;//here
         emptyTile.className = tempTile.className;
         emptyTile.innerHTML = tempTile.innerHTML;
+        emptyTile.style.backgroundPosition = tempTile.backgroundPosition;
+        emptyTile.style.backgroundImage = tempTile.backgroundImage;//here
 
         checkSolved();
 
@@ -163,5 +175,18 @@ function checkSolved() {
     alert("You Won!");
     return 1;
 }
+
+function changeBackgroundImage (image) {
+
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 4; j++) {
+            currentTile = getTile(i, j);
+            //console.log(count + ", " + currentTile.innerHTML);
+            if (currentTile.className != "emptyTile") {
+                currentTile.style.backgroundImage = "url(" + image +")";
+                }
+            }
+        }
+    } 
 
 

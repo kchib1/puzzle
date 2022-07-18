@@ -70,7 +70,6 @@ function initializeTimer() {
 
 
 function play() {
-
     let myMusic= document.getElementById("music");
     myMusic.play();
 }
@@ -78,16 +77,7 @@ function play() {
 function pause() {
     let myMusic= document.getElementById("music");
     myMusic.pause();
-=======
-let timeId="timer";
-
-let hourStart = 0;
-let minStart = 0;
-let secStart = 0;
-
-let hour;
-let min;
-let sec;
+}
 
 
 function initializeTimer() {
@@ -146,16 +136,4 @@ function initializeTimer() {
     let currentTime = hour + ":" + min + ":" + sec ;
     document.getElementById("timer").innerHTML = "<p>" +currentTime+"</p>";
 
-}
-
-
-function play() {
-
-    let myMusic= document.getElementById("music");
-    myMusic.play();
-}
-
-function pause() {
-    let myMusic= document.getElementById("music");
-    myMusic.pause();
 }
