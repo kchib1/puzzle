@@ -2,11 +2,25 @@ let puzzle = document.getElementById('puzzle');
 let isSolved = 0;
 
 createBoard();
-shuffle();
+// shuffle();
 
 puzzle.addEventListener("click", function(e) {
     move(e.target);
   });
+
+puzzle.addEventListener("mouseover", function(e) {
+         if (getEmptyNeighbor(getNeighbors(e.target)) !== -1) {
+            e.target.classList.remove("tile");
+            e.target.classList.add("movableTile");
+         }
+    });
+
+puzzle.addEventListener("mouseout", function(e) {
+    if (e.target.classList.contains("movableTile")) {
+        e.target.classList.remove("movableTile");
+        e.target.classList.add("tile");
+    }
+});
 
 
 //create and populate 4x4 board 
@@ -39,7 +53,7 @@ function shuffle() {
         move(neighbors[rand]);
     }
 
-    // // Init/start timer and music
+    // Init/start timer and music
     // initializeTimer();
     // setInterval(showInterval, 1000);
     // setTimeout(play, 500);
@@ -95,31 +109,40 @@ function getEmptyNeighbor(neighbors) {
 
 //check if a tile is moveable and add class 'moveableTile' if it is
 function checkMoveable(targetTile) {
-    if (getEmptyNeighbor(getNeighbors(targetTile)) === -1) {
-        targetTile.classList.add('moveableTile');
-    }
-    else {
-        return -1;
+    if (targetTile.classList.contains("movableTile")) {
+        targetTile.classList.remove("movableTile");
+        targetTile.classList.add("tile");
     }
 }
 
 //moves target tile to empty neighbor if one exists
 function move(targetTile) {
-    let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
+        let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
 
-    if (emptyTile === -1) {
-        return;
+        if (emptyTile === -1) {
+            return;
+        }
+
+        //swap target tile and empty tile
+        let tempTile = { className: targetTile.className, id: targetTile.id, innerHTML: targetTile.innerHTML};
+
+        targetTile.className = emptyTile.className;
+        targetTile.innerHTML = emptyTile.innerHTML;
+        emptyTile.className = tempTile.className;
+        emptyTile.innerHTML = tempTile.innerHTML;
+
+        checkSolved();
+
+        let count = 0;
+        let currentTile;
+
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 4; j++) {
+                count++;
+                currentTile = getTile(i, j);
+                checkMoveable(currentTile);
+        }
     }
-
-    //swap target tile and empty tile
-    let tempTile = { className: targetTile.className, id: targetTile.id, innerHTML: targetTile.innerHTML};
-
-    targetTile.className = emptyTile.className;
-    targetTile.innerHTML = emptyTile.innerHTML;
-    emptyTile.className = tempTile.className;
-    emptyTile.innerHTML = tempTile.innerHTML;
-
-    checkSolved();
 }
 
 function checkSolved() {
@@ -130,7 +153,6 @@ function checkSolved() {
         for (var j = 0; j < 4; j++) {
             count++;
             currentTile = getTile(i, j);
-            console.log(count + ", " + currentTile.innerHTML);
             if (currentTile.className != "emptyTile") {
                 if (currentTile.innerHTML != count) {
                     return;
