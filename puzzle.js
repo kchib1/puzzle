@@ -35,7 +35,6 @@ function createBoard() {
             tile.style.backgroundImage = "url(jwst.jpg)";
             if(j==3 && i==3){
                 tile.style.backgroundImage="url(white.jpg)";
-                console.log("test")
             }
 
             tile.classList.add('tile');
