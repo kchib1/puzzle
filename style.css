@@ -1,14 +1,14 @@
 #puzzle {
+    height: 400px;
+    width: 450px;
     position: relative;
     display: flex;
-    height: 1000px;
+    flex-wrap: wrap;
     margin: auto;
-}
-
-#test {
-    height: 400px;
-    width: 400px;
     background-size: contain;
+
+    
+
 }
 
 .tile {
@@ -19,13 +19,14 @@
     border: 2px solid black;
     font-size: 32pt;
     text-align: center;
-    margin: 4px auto;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    padding: 0px;
     font-size: 32px;
+
+
+  
 }
 
 .emptyTile {
@@ -36,8 +37,8 @@
     border: 2px solid black;
     font-size: 32pt;
     text-align: center;
-    margin: 4px auto;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
+

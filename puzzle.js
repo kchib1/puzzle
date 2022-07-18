@@ -1,9 +1,7 @@
 let puzzle = document.getElementById('puzzle');
-
+let isSolved = 0;
 createBoard();
-
 //shuffle();
-
 
 puzzle.addEventListener("click", function(e) {
     move(e.target);
@@ -16,7 +14,16 @@ function createBoard() {
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 4; j++) {
             let tile = document.createElement('div');
-            tile.id = 'tile_${i}_${j}';
+       
+            tile.style.backgroundPosition = '-' + j*100 + 'px' + " " +'-' + i*100 + "px" ; //this math is off 
+            tile.style.backgroundImage = "url(jwst.jpg)";
+            if(j==3 && i==3){
+                tile.style.backgroundImage="url(white.jpg)";
+                console.log("test")
+            }
+       
+
+            tile.id = "tile_" + i + "_" + j;
             tile.classList.add('tile');
             count++;
             tile.innerHTML = count.toString();
@@ -32,7 +39,21 @@ function createBoard() {
 
 //randomly make a legal move 1000 times
 function shuffle() {
+    let neighbors;
+    let rand;
+    for(var i = 0; i < 1000; i++) {
+        neighbors = getNeighbors(getEmptyTile());
+        rand = parseInt(Math.random() * (neighbors.length));
+        move(neighbors[rand]);
+    }
 
+    // // Init/start timer and music
+    // initializeTimer();
+    // setInterval(showInterval, 1000);
+    // setTimeout(play, 500);
+    // setInterval(play, 7000);  // Interval
+    // showInterval();	
+	
 }
 
 //get tile by coordinate pair
@@ -42,14 +63,14 @@ function getTile(x, y) {
 
 //get empty tile
 function getEmptyTile() {
-    return document.querySelector('.empty');
+    return document.querySelector('.emptyTile');
 }
 
 //get tiles which neighbor the passed tile
 function getNeighbors(targetTile) {
     let xyCord = targetTile.id.split("_");
-    let y = parseInt(xyCord[1]);
-    let x = parseInt(xyCord[2]);
+    let x = parseInt(xyCord[1]);
+    let y = parseInt(xyCord[2]);
 
     let neighbors = [];
 
@@ -72,16 +93,26 @@ function getNeighbors(targetTile) {
 //returns -1 if there is no empty neighbor
 function getEmptyNeighbor(neighbors) {
     for (var i = 0; i < neighbors.length; i++) {
-        if (neighbors[i].className === "empty") {
-            return neighbor[i];
+        if (neighbors[i].className === "emptyTile") {
+            return neighbors[i];
         }
     }
+
     return -1;
+}
+
+//check if a tile is moveable and add class 'moveableTile' if it is
+function checkMoveable(targetTile) {
+    if (getEmptyNeighbor(getNeighbors(targetTile)) === -1) {
+        targetTile.classList.add('moveableTile');
+    }
+    else {
+        return -1;
+    }
 }
 
 //moves target tile to empty neighbor if one exists
 function move(targetTile) {
-
     let emptyTile = getEmptyNeighbor(getNeighbors(targetTile));
 
     if (emptyTile === -1) {
@@ -89,18 +120,51 @@ function move(targetTile) {
     }
 
     //swap target tile and empty tile
-    let tempTile = { style: targetTile.style.cssText, id: targetTile.id };
+    let tempTile = { className: targetTile.className, id: targetTile.id, innerHTML: targetTile.innerHTML, backgroundImage: targetTile.style.backgroundImage, backgroundPosition: targetTile.style.backgroundPosition};
 
-    targetTile.style.cssText = emptyTile.style.cssText;
-    targetTile.id = emptyTile.id;
-    emptyTile.style.cssText = tempTile.style.cssText;
-    emptyTile.id = tempTile.id;
+    targetTile.style.backgroundPosition = emptyTile.style.backgroundPosition;
+    targetTile.style.backgroundImage = emptyTile.style.backgroundImage;//here
+    targetTile.className = emptyTile.className;
+    targetTile.innerHTML = emptyTile.innerHTML;
 
+    emptyTile.style.backgroundPosition = tempTile.backgroundPosition;
+    emptyTile.style.backgroundImage = tempTile.backgroundImage;//here
+    emptyTile.className = tempTile.className;
+    emptyTile.innerHTML = tempTile.innerHTML;
+
+    checkSolved();
 }
 
-function changeBackgroundImage (background) {
-    element = document.getElementById('test');
-    element.style.backgroundImage = "url("+background+")";
- }
+function checkSolved() {
+    let count = 0;
+    let currentTile;
+    
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 4; j++) {
+            count++;
+            currentTile = getTile(i, j);
+            //console.log(count + ", " + currentTile.innerHTML);
+            if (currentTile.className != "emptyTile") {
+                if (currentTile.innerHTML != count) {
+                    return;
+                }
+            }
+        }
+    }
+    isSolved = 1;
+    //alert("You Won!");
+    return 1;
+}
 
-
+function changeBackgroundImage (image) {
+ 
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 4; j++) {
+            currentTile = getTile(i, j);
+            //console.log(count + ", " + currentTile.innerHTML);
+            if (currentTile.className != "emptyTile") {
+                currentTile.style.backgroundImage = "url(" + image +")";
+                }
+            }
+        }
+    } 
