@@ -57,6 +57,15 @@ function shuffle() {
     let neighbors;
     let rand;
 
+    let tiles = document.querySelectorAll('.tile, .movableTile, .emptyTile');
+
+    if(tiles[0].style.animationName) {
+        for (let i = 0; i < tiles.length; i++) {
+            tiles[i].style.removeProperty('animation-name', 'animation-duration', 'animation-iteration-count', 'animation-timing-function');
+        }
+    }
+
+
     for(let i = 0; i < 1000; i++) {
         neighbors = getNeighbors(getEmptyTile());
         rand = parseInt(Math.random() * (neighbors.length));
@@ -179,9 +188,12 @@ function checkSolved() {
     }
 
     isSolved = 1;
-    //alert("You Won!");
     let text = document.getElementById("win");
+    let tiles = document.querySelectorAll('.tile, .movableTile, .emptyTile');
     text.innerHTML= "You Won!!!";
+    for (let i = 0; i < tiles.length; i++) {
+        tiles[i].style.cssText += "animation-name:spin;animation-duration:5000ms;animation-iteration-count:infinite;animation-timing-function:linear;";
+    }
     return 1;
 }
 
