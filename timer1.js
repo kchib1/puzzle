@@ -102,6 +102,9 @@ function initializeTimer() {
     sec = sec < 10 ? "0" + sec : sec;
  
     let currentTime = hour + ":" + min + ":" + sec ;
-    document.getElementById("timer").innerHTML = currentTime;
+
+    if (isSolved === 0) {
+        document.getElementById("timer").innerHTML = currentTime;
+    }
 
 }

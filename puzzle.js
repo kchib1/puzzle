@@ -54,7 +54,7 @@ function createBoard() {
 function shuffle() {
     let neighbors;
     let rand;
-    for(var i = 0; i < 1000; i++) {
+    for(var i = 0; i < 1; i++) {
         neighbors = getNeighbors(getEmptyTile());
         rand = parseInt(Math.random() * (neighbors.length));
         move(neighbors[rand], 1);
@@ -68,7 +68,7 @@ function shuffle() {
     setTimeout(play, 500);
     setInterval(play, 7000);  // Interval
     showInterval();	
-	
+	isSolved = 0;
 }
 
 //get tile by coordinate pair
