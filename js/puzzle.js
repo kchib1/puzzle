@@ -1,6 +1,8 @@
 let puzzle = document.getElementById('puzzle');
 let isSolved = 0;
 
+let intervalID;
+
 createBoard();
 // shuffle();
 
@@ -76,7 +78,7 @@ function shuffle() {
     text.innerHTML= "";
     // // Init/start timer and music
     initializeTimer();
-    setInterval(showInterval, 1000);
+    intervalID = setInterval(showInterval, 1000);
     setTimeout(play, 500);
     setInterval(play, 7000);  // Interval
     showInterval();	
@@ -194,6 +196,8 @@ function checkSolved() {
     for (let i = 0; i < tiles.length; i++) {
         tiles[i].style.cssText += "animation-name:spin;animation-duration:5000ms;animation-iteration-count:infinite;animation-timing-function:linear;";
     }
+    pause();
+    clearInterval(intervalID);
     return 1;
 }
 
@@ -207,6 +211,4 @@ function changeBackgroundImage (image) {
             }
         }
     }
-} 
-
-
+}
