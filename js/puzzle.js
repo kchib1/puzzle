@@ -1,6 +1,8 @@
 let puzzle = document.getElementById('puzzle');
 let isSolved = 0;
 
+let intervalID;
+
 createBoard();
 // shuffle();
 
@@ -67,7 +69,7 @@ function shuffle() {
     text.innerHTML= "";
     // // Init/start timer and music
     initializeTimer();
-    setInterval(showInterval, 1000);
+    intervalID = setInterval(showInterval, 1000);
     setTimeout(play, 500);
     setInterval(play, 7000);  // Interval
     showInterval();	
@@ -182,6 +184,8 @@ function checkSolved() {
     //alert("You Won!");
     let text = document.getElementById("win");
     text.innerHTML= "You Won!!!";
+    pause();
+    clearInterval(intervalID);
     return 1;
 }
 
@@ -195,6 +199,4 @@ function changeBackgroundImage (image) {
             }
         }
     }
-} 
-
-
+}

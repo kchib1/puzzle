@@ -14,28 +14,18 @@ function initializeTimer() {
     
       let date = new Date();
 
-      
       hourStart = -Number(date.getHours());
       minStart = -Number(date.getMinutes());
       secStart = -Number(date.getSeconds());
-
 
       hour = hourStart;
       min = minStart;
       sec = secStart;
 
-      
-     
       let currentTime = "00:00:00" ;
 
-      
-
       document.getElementById(timeId).innerHTML = currentTime;
-      //play();
 }
-
-
-  
 
 function play() {
     let myMusic= document.getElementById("music");
@@ -47,33 +37,7 @@ function pause() {
     myMusic.pause();
 }
 
-
-function initializeTimer() {
-    
-      let date = new Date();
-
-      
-      hourStart = -Number(date.getHours());
-      minStart = -Number(date.getMinutes());
-      secStart = -Number(date.getSeconds());
-
-
-      hour = hourStart;
-      min = minStart;
-      sec = secStart;
-
-      
-     
-      let currentTime = "00:00:00" ;
-
-      
-
-      document.getElementById(timeId).innerHTML = currentTime;
-      //play();
-}
-
-
-  function showInterval() {
+function showInterval() {
     
     let date = new Date(); /* creating object of Date class */
     let hour = date.getHours() + hourStart;
@@ -96,7 +60,6 @@ function initializeTimer() {
     min = min < 0 ? min + 60 : min;
     hour = hour < 0 ? hour + 12 : hour;
 
-
     hour = hour < 10 ? "0" + hour : hour;
     min = min < 10 ? "0" + min : min;
     sec = sec < 10 ? "0" + sec : sec;
@@ -106,5 +69,4 @@ function initializeTimer() {
     if (isSolved === 0) {
         document.getElementById("timer").innerHTML = currentTime;
     }
-
 }
