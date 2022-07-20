@@ -54,7 +54,7 @@ function createBoard() {
 function shuffle() {
     let neighbors;
     let rand;
-    for(var i = 0; i < 1; i++) {
+    for(var i = 0; i < 1000; i++) {
         neighbors = getNeighbors(getEmptyTile());
         rand = parseInt(Math.random() * (neighbors.length));
         move(neighbors[rand], 1);
