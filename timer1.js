@@ -64,7 +64,7 @@ function initializeTimer() {
     sec = sec < 10 ? "0" + sec : sec;
  
     let currentTime = hour + ":" + min + ":" + sec ;
-    document.getElementById("timer").innerHTML = "<p>" +currentTime+"</p>";
+    document.getElementById("timer").innerHTML = currentTime;
 
 }
 
@@ -134,6 +134,6 @@ function initializeTimer() {
     sec = sec < 10 ? "0" + sec : sec;
  
     let currentTime = hour + ":" + min + ":" + sec ;
-    document.getElementById("timer").innerHTML = "<p>" +currentTime+"</p>";
+    document.getElementById("timer").innerHTML = currentTime;
 
 }
