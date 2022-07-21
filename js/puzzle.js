@@ -68,7 +68,7 @@ function shuffle() {
     }
 
 
-    for(let i = 0; i < 1000; i++) {
+    for(let i = 0; i < 1; i++) {
         neighbors = getNeighbors(getEmptyTile());
         rand = parseInt(Math.random() * (neighbors.length));
         move(neighbors[rand], 1);
@@ -78,11 +78,11 @@ function shuffle() {
     text.innerHTML= "";
     // // Init/start timer and music
     initializeTimer();
-    intervalID = setInterval(showInterval, 1000);
+    setInterval(showInterval, 1000);
     setTimeout(play, 500);
-    setInterval(play, 7000);  // Interval
-    showInterval();	
-	isSolved = 0;
+    intervalID = setInterval(play, 7000);  // Interval
+    showInterval();
+    isSolved = 0;
 }
 
 //get tile by coordinate pair
