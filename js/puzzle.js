@@ -68,7 +68,7 @@ function shuffle() {
     }
 
 
-    for(let i = 0; i < 1; i++) {
+    for(let i = 0; i < 1000; i++) {
         neighbors = getNeighbors(getEmptyTile());
         rand = parseInt(Math.random() * (neighbors.length));
         move(neighbors[rand], 1);
